@@ -47,24 +47,21 @@ class App extends Component {
 		})
 
 		//Aquí utilizando una pantalla de carga intermedia por si nuestro archivo de otra ubicación aún no se muestra
-		return isPending ?
-		// utilizando el negado del length tenemos que si la cadena es vacía osea cero, entonces negamos el cero(0) y nos da uno(1) 
-		// lo que es equivalente a decir que se cambia el falso por el verdadero
-		//por ultimo utilizamos operador ternario para hacer más limpia la comparación del if anterior
-			<h1>Loading</h1> :
-			//sino retornamos
-			(
-				<div className='tc'>
-					<h1>RoboFriends</h1>
-					<SearchBox searchChange = {onSearchChange}/>
-					<Scroll>
-						<ErrorBoundry>
-							<CardList robots = {filteredRobots}/>
-						</ErrorBoundry>
-					</Scroll>
-					<MyComponent />
-				</div>
-			);
+		return (
+			<div className='tc'>
+				<h1>RoboFriends</h1>
+				<SearchBox searchChange = {onSearchChange}/>
+				<Scroll>
+				{isPending ?
+					<h1>Loading</h1> :
+					<ErrorBoundry>
+						<CardList robots = {filteredRobots}/>
+					</ErrorBoundry>
+				}
+				</Scroll>
+				<MyComponent />
+			</div>
+		);
 	}
 }
 
